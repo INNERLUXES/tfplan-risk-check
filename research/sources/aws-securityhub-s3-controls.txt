@@ -1,0 +1,46 @@
+Source: https://docs.aws.amazon.com/securityhub/latest/userguide/s3-controls.html
+Extract: the control S3.8; the page is long
+
+# [S3.8] S3 general purpose buckets should block public access
+
+Related requirements: CIS AWS Foundations Benchmark v5.0.0/2.1.4, CIS AWS Foundations Benchmark v3.0.02.1.4, CIS AWS Foundations Benchmark v1.4.0/2.1.5, NIST.800-53.r5 AC-21, NIST.800-53.r5 AC-3, NIST.800-53.r5 AC-3(7), NIST.800-53.r5 AC-4, NIST.800-53.r5 AC-4(21), NIST.800-53.r5 AC-6, NIST.800-53.r5 SC-7, NIST.800-53.r5 SC-7(11), NIST.800-53.r5 SC-7(16), NIST.800-53.r5 SC-7(20), NIST.800-53.r5 SC-7(21), NIST.800-53.r5 SC-7(3), NIST.800-53.r5 SC-7(4), NIST.800-53.r5 SC-7(9), PCI DSS v4.0.1/1.4.4
+
+Category: Protect > Secure access management > Access
+control
+
+Severity: High
+
+Resource type:
+AWS::S3::Bucket
+
+AWS Config rule:
+s3-bucket-level-public-access-prohibited
+
+Schedule type: Change triggered
+
+Parameters:
+
+excludedPublicBuckets (not customizable) – A comma-separated list of known
+allowed public S3 bucket names
+
+This control checks whether an Amazon S3 general purpose bucket blocks public access at the bucket level. The
+control fails if any of the following settings are set to false:
+
+ignorePublicAcls
+
+blockPublicPolicy
+
+blockPublicAcls
+
+restrictPublicBuckets
+
+Block Public Access at the S3 bucket level provides controls to ensure that objects never
+have public access. Public access is granted to buckets and objects through access control lists
+(ACLs), bucket policies, or both.
+
+Unless you intend to have your S3 buckets publicly accessible, you should configure the
+bucket level Amazon S3 Block Public Access feature.
+
+# Remediation
+
+For information on how to remove public access at a bucket level, see Blocking public access to your Amazon S3 storage in the Amazon S3 User Guide.

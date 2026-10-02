@@ -1,0 +1,50 @@
+{
+  "name": "tfplan-risk-check",
+  "version": "1.0.0",
+  "description": "Read the JSON form of a Terraform plan (terraform show -json plan.out) and report the planned changes that would expose data or weaken security on AWS, Azure or Google Cloud before apply: public access blocks, security groups and firewalls open to the internet on SSH and RDP, public or unencrypted databases and disks, public storage, old TLS versions, and the deletion or replacement of databases, buckets and volumes. Each finding names the resource address, the attribute, the action, the severity and a fix, and quotes the provider or cloud documentation. Reads one file only, never runs Terraform and never calls a cloud, no dependencies.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "bin": {
+    "tfplan-risk-check": "bin/tfplan-risk-check.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "docs",
+    "examples",
+    "research",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test \"test/*.test.js\"",
+    "test:coverage": "node --test --experimental-test-coverage \"test/*.test.js\"",
+    "check": "node tools/check.mjs",
+    "example": "node tools/example.mjs"
+  },
+  "keywords": [
+    "terraform",
+    "terraform-plan",
+    "plan",
+    "aws",
+    "azure",
+    "gcp",
+    "security",
+    "linter",
+    "devops",
+    "cli"
+  ],
+  "author": "INNERLUXES <info@innerluxes.dev>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/INNERLUXES/tfplan-risk-check.git"
+  },
+  "homepage": "https://innerluxes.dev/application/development/cloud"
+}
