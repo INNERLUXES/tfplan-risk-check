@@ -1,0 +1,787 @@
+{
+  "tool": "tfplan-risk-check",
+  "version": "1.0.0",
+  "target": "plan.json",
+  "input": {
+    "file": "plan.json",
+    "bytes": 49917,
+    "formatVersion": "1.2",
+    "terraformVersion": "1.9.8",
+    "resources": 20,
+    "changes": {
+      "create": 18,
+      "update": 0,
+      "delete": 1,
+      "replace": 1,
+      "noop": 0,
+      "read": 0,
+      "other": 0
+    },
+    "checked": 19
+  },
+  "findings": [
+    {
+      "id": "aws-s3-public-access-block-off",
+      "severity": "error",
+      "cloud": "aws",
+      "address": "aws_s3_bucket_public_access_block.orders_exports",
+      "type": "aws_s3_bucket_public_access_block",
+      "attribute": "block_public_policy",
+      "action": "create",
+      "message": "block_public_policy is false, so this part of S3 Block Public Access is off for the bucket.",
+      "fix": "Set block_public_policy to true; the four settings are recommended together.",
+      "manual": [
+        {
+          "page": "Amazon S3, Blocking public access",
+          "title": "Blocking public access to your Amazon S3 storage",
+          "section": "Blocking public access to your Amazon S3 storage",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html",
+          "quote": "S3 Block Public Access settings override these policies and permissions so that you can limit public access to these resources."
+        },
+        {
+          "page": "Amazon S3, Blocking public access",
+          "title": "Blocking public access to your Amazon S3 storage",
+          "section": "Important",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html",
+          "quote": "Additionally, we recommend that you also turn on all four settings for each bucket to comply with AWS Security Hub Foundational Security Best Practices control S3.8."
+        },
+        {
+          "page": "AWS Security Hub, S3 controls",
+          "title": "",
+          "section": "[S3.8] S3 general purpose buckets should block public access",
+          "url": "https://docs.aws.amazon.com/securityhub/latest/userguide/s3-controls.html",
+          "quote": "The control fails if any of the following settings are set to false:"
+        },
+        {
+          "page": "aws_s3_bucket_public_access_block (AWS provider 6.67.0)",
+          "title": "Resource: aws_s3_bucket_public_access_block",
+          "section": "Argument Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/6.67.0/docs/resources/s3_bucket_public_access_block",
+          "quote": "Whether Amazon S3 should block public bucket policies for this bucket. Defaults to `false`."
+        }
+      ]
+    },
+    {
+      "id": "aws-s3-public-access-block-off",
+      "severity": "error",
+      "cloud": "aws",
+      "address": "aws_s3_bucket_public_access_block.orders_exports",
+      "type": "aws_s3_bucket_public_access_block",
+      "attribute": "restrict_public_buckets",
+      "action": "create",
+      "message": "restrict_public_buckets is false, so this part of S3 Block Public Access is off for the bucket.",
+      "fix": "Set restrict_public_buckets to true; the four settings are recommended together.",
+      "manual": [
+        {
+          "page": "Amazon S3, Blocking public access",
+          "title": "Blocking public access to your Amazon S3 storage",
+          "section": "Blocking public access to your Amazon S3 storage",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html",
+          "quote": "S3 Block Public Access settings override these policies and permissions so that you can limit public access to these resources."
+        },
+        {
+          "page": "Amazon S3, Blocking public access",
+          "title": "Blocking public access to your Amazon S3 storage",
+          "section": "Important",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html",
+          "quote": "Additionally, we recommend that you also turn on all four settings for each bucket to comply with AWS Security Hub Foundational Security Best Practices control S3.8."
+        },
+        {
+          "page": "AWS Security Hub, S3 controls",
+          "title": "",
+          "section": "[S3.8] S3 general purpose buckets should block public access",
+          "url": "https://docs.aws.amazon.com/securityhub/latest/userguide/s3-controls.html",
+          "quote": "The control fails if any of the following settings are set to false:"
+        },
+        {
+          "page": "aws_s3_bucket_public_access_block (AWS provider 6.67.0)",
+          "title": "Resource: aws_s3_bucket_public_access_block",
+          "section": "Argument Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/6.67.0/docs/resources/s3_bucket_public_access_block",
+          "quote": "Whether Amazon S3 should restrict public bucket policies for this bucket. Defaults to `false`."
+        }
+      ]
+    },
+    {
+      "id": "aws-s3-public-access-block-missing",
+      "severity": "warning",
+      "cloud": "aws",
+      "address": "aws_s3_bucket.orders_uploads",
+      "type": "aws_s3_bucket",
+      "attribute": "(resource)",
+      "action": "create",
+      "message": "No aws_s3_bucket_public_access_block in the plan points at this bucket, so this plan sets no Block Public Access setting on it. A setting made on the account or the organization outside this plan is not seen.",
+      "fix": "Add an aws_s3_bucket_public_access_block for the bucket with block_public_acls, block_public_policy, ignore_public_acls and restrict_public_buckets all true.",
+      "manual": [
+        {
+          "page": "Amazon S3, Blocking public access",
+          "title": "Blocking public access to your Amazon S3 storage",
+          "section": "Blocking public access to your Amazon S3 storage",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html",
+          "quote": "S3 Block Public Access settings override these policies and permissions so that you can limit public access to these resources."
+        },
+        {
+          "page": "Amazon S3, Blocking public access",
+          "title": "Blocking public access to your Amazon S3 storage",
+          "section": "Important",
+          "url": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html",
+          "quote": "Additionally, we recommend that you also turn on all four settings for each bucket to comply with AWS Security Hub Foundational Security Best Practices control S3.8."
+        },
+        {
+          "page": "AWS Security Hub, S3 controls",
+          "title": "",
+          "section": "[S3.8] S3 general purpose buckets should block public access",
+          "url": "https://docs.aws.amazon.com/securityhub/latest/userguide/s3-controls.html",
+          "quote": "Unless you intend to have your S3 buckets publicly accessible, you should configure the bucket level Amazon S3 Block Public Access feature."
+        }
+      ]
+    },
+    {
+      "id": "aws-sg-ssh-open",
+      "severity": "error",
+      "cloud": "aws",
+      "address": "aws_security_group.orders_app",
+      "type": "aws_security_group",
+      "attribute": "ingress[1].cidr_blocks[0]",
+      "action": "create",
+      "message": "An ingress rule allows TCP port 22 (SSH) from 0.0.0.0/0, which is the whole internet.",
+      "fix": "Limit the source to the addresses that need SSH access (a CIDR block of your own, or the security group of a bastion host), or remove the rule.",
+      "manual": [
+        {
+          "page": "AWS Security Hub, EC2 controls",
+          "title": "",
+          "section": "[EC2.13] Security groups should not allow ingress from 0.0.0.0/0 or ::/0 to port 22",
+          "url": "https://docs.aws.amazon.com/securityhub/latest/userguide/ec2-controls.html",
+          "quote": "We recommend that no security group allow unrestricted ingress access to port 22."
+        },
+        {
+          "page": "AWS Security Hub, EC2 controls",
+          "title": "",
+          "section": "[EC2.13] Security groups should not allow ingress from 0.0.0.0/0 or ::/0 to port 22",
+          "url": "https://docs.aws.amazon.com/securityhub/latest/userguide/ec2-controls.html",
+          "quote": "Removing unfettered connectivity to remote console services, such as SSH, reduces a server's exposure to risk."
+        },
+        {
+          "page": "AWS Security Hub, EC2 controls",
+          "title": "",
+          "section": "[EC2.19] Security groups should not allow unrestricted access to ports with high risk",
+          "url": "https://docs.aws.amazon.com/securityhub/latest/userguide/ec2-controls.html",
+          "quote": "Unrestricted access (0.0.0.0/0) increases opportunities for malicious activity, such as hacking, denial-of-service attacks, and loss of data."
+        }
+      ]
+    },
+    {
+      "id": "aws-sg-all-ports-open",
+      "severity": "error",
+      "cloud": "aws",
+      "address": "aws_security_group_rule.debug_everything",
+      "type": "aws_security_group_rule",
+      "attribute": "ipv6_cidr_blocks[0]",
+      "action": "create",
+      "message": "An ingress rule allows all protocols and all ports from ::/0, which is the whole internet.",
+      "fix": "Open only the ports that the service needs, and only to the sources that need them.",
+      "manual": [
+        {
+          "page": "AWS Security Hub, EC2 controls",
+          "title": "",
+          "section": "[EC2.18] Security groups should only allow unrestricted incoming traffic for authorized ports",
+          "url": "https://docs.aws.amazon.com/securityhub/latest/userguide/ec2-controls.html",
+          "quote": "Unless a port is specifically allowed, the port should deny unrestricted access."
+        },
+        {
+          "page": "AWS Security Hub, EC2 controls",
+          "title": "",
+          "section": "[EC2.18] Security groups should only allow unrestricted incoming traffic for authorized ports",
+          "url": "https://docs.aws.amazon.com/securityhub/latest/userguide/ec2-controls.html",
+          "quote": "Unrestricted access (IP address with a /0 suffix) increases the opportunity for malicious activity such as hacking, denial-of-service attacks, and loss of data."
+        },
+        {
+          "page": "AWS Security Hub, EC2 controls",
+          "title": "",
+          "section": "[EC2.19] Security groups should not allow unrestricted access to ports with high risk",
+          "url": "https://docs.aws.amazon.com/securityhub/latest/userguide/ec2-controls.html",
+          "quote": "Unrestricted access (0.0.0.0/0) increases opportunities for malicious activity, such as hacking, denial-of-service attacks, and loss of data."
+        },
+        {
+          "page": "aws_security_group_rule (AWS provider 6.67.0)",
+          "title": "Resource: aws_security_group_rule",
+          "section": "Resource: aws_security_group_rule",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/6.67.0/docs/resources/security_group_rule",
+          "quote": "Setting `protocol = \"all\"` or `protocol = -1` with `from_port` and `to_port` will result in the EC2 API creating a security group rule with all ports open."
+        },
+        {
+          "page": "aws_security_group (AWS provider 6.67.0)",
+          "title": "Resource: aws_security_group",
+          "section": "ingress",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/6.67.0/docs/resources/security_group",
+          "quote": "If you select a protocol of `-1` (semantically equivalent to `all`, which is not a valid value here), you must specify a `from_port` and `to_port` equal to 0."
+        },
+        {
+          "page": "aws_vpc_security_group_ingress_rule (AWS provider 6.67.0)",
+          "title": "Resource: aws_vpc_security_group_ingress_rule",
+          "section": "Argument Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/6.67.0/docs/resources/vpc_security_group_ingress_rule",
+          "quote": "Use `-1` to specify all protocols."
+        }
+      ]
+    },
+    {
+      "id": "aws-sg-rdp-open",
+      "severity": "error",
+      "cloud": "aws",
+      "address": "aws_vpc_security_group_ingress_rule.rdp_admin",
+      "type": "aws_vpc_security_group_ingress_rule",
+      "attribute": "cidr_ipv4",
+      "action": "create",
+      "message": "An ingress rule allows TCP port 3389 (RDP) from 0.0.0.0/0, which is the whole internet.",
+      "fix": "Limit the source to the addresses that need RDP access (a CIDR block of your own, or the security group of a bastion host), or remove the rule.",
+      "manual": [
+        {
+          "page": "AWS Security Hub, EC2 controls",
+          "title": "",
+          "section": "[EC2.14] Security groups should not allow ingress from 0.0.0.0/0 or ::/0 to port 3389",
+          "url": "https://docs.aws.amazon.com/securityhub/latest/userguide/ec2-controls.html",
+          "quote": "We recommend that no security group allow unrestricted ingress access to port 3389."
+        },
+        {
+          "page": "AWS Security Hub, EC2 controls",
+          "title": "",
+          "section": "[EC2.14] Security groups should not allow ingress from 0.0.0.0/0 or ::/0 to port 3389",
+          "url": "https://docs.aws.amazon.com/securityhub/latest/userguide/ec2-controls.html",
+          "quote": "Removing unfettered connectivity to remote console services, such as RDP, reduces a server's exposure to risk."
+        },
+        {
+          "page": "AWS Security Hub, EC2 controls",
+          "title": "",
+          "section": "[EC2.19] Security groups should not allow unrestricted access to ports with high risk",
+          "url": "https://docs.aws.amazon.com/securityhub/latest/userguide/ec2-controls.html",
+          "quote": "Unrestricted access (0.0.0.0/0) increases opportunities for malicious activity, such as hacking, denial-of-service attacks, and loss of data."
+        }
+      ]
+    },
+    {
+      "id": "aws-rds-public",
+      "severity": "error",
+      "cloud": "aws",
+      "address": "aws_db_instance.orders",
+      "type": "aws_db_instance",
+      "attribute": "publicly_accessible",
+      "action": "create",
+      "message": "publicly_accessible is true, so the DB instance is planned as an Internet-facing instance.",
+      "fix": "Set publicly_accessible to false and reach the database from inside the network.",
+      "manual": [
+        {
+          "page": "AWS Security Hub, RDS controls",
+          "title": "",
+          "section": "[RDS.2] RDS DB Instances should prohibit public access, as determined by the PubliclyAccessible configuration",
+          "url": "https://docs.aws.amazon.com/securityhub/latest/userguide/rds-controls.html",
+          "quote": "When the DB instance is configured with PubliclyAccessible, it is an Internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address."
+        },
+        {
+          "page": "AWS Security Hub, RDS controls",
+          "title": "",
+          "section": "[RDS.2] RDS DB Instances should prohibit public access, as determined by the PubliclyAccessible configuration",
+          "url": "https://docs.aws.amazon.com/securityhub/latest/userguide/rds-controls.html",
+          "quote": "Unless you intend for your RDS instance to be publicly accessible, the RDS instance should not be configured with PubliclyAccessible value."
+        },
+        {
+          "page": "aws_db_instance (AWS provider 6.67.0)",
+          "title": "Resource: aws_db_instance",
+          "section": "Argument Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/6.67.0/docs/resources/db_instance",
+          "quote": "Bool to control if instance is publicly accessible. Default is `false`."
+        }
+      ]
+    },
+    {
+      "id": "aws-rds-unencrypted",
+      "severity": "warning",
+      "cloud": "aws",
+      "address": "aws_db_instance.orders",
+      "type": "aws_db_instance",
+      "attribute": "storage_encrypted",
+      "action": "create",
+      "message": "storage_encrypted is false, so the storage of the DB instance is not encrypted at rest.",
+      "fix": "Set storage_encrypted to true.",
+      "manual": [
+        {
+          "page": "AWS Security Hub, RDS controls",
+          "title": "",
+          "section": "[RDS.3] RDS DB instances should have encryption at-rest enabled",
+          "url": "https://docs.aws.amazon.com/securityhub/latest/userguide/rds-controls.html",
+          "quote": "For an added layer of security for your sensitive data in RDS DB instances, you should configure your RDS DB instances to be encrypted at rest."
+        },
+        {
+          "page": "aws_db_instance (AWS provider 6.67.0)",
+          "title": "Resource: aws_db_instance",
+          "section": "Argument Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/6.67.0/docs/resources/db_instance",
+          "quote": "Note that if you are creating a cross-region read replica this field is ignored and you should instead declare `kms_key_id` with a valid ARN. The default is `false` if not specified."
+        }
+      ]
+    },
+    {
+      "id": "aws-ebs-unencrypted",
+      "severity": "warning",
+      "cloud": "aws",
+      "address": "aws_ebs_volume.orders_scratch",
+      "type": "aws_ebs_volume",
+      "attribute": "encrypted",
+      "action": "create",
+      "message": "encrypted is false, so the volume is planned without encryption at rest.",
+      "fix": "Set encrypted to true.",
+      "manual": [
+        {
+          "page": "AWS Security Hub, EC2 controls",
+          "title": "",
+          "section": "[EC2.3] Attached Amazon EBS volumes should be encrypted at-rest",
+          "url": "https://docs.aws.amazon.com/securityhub/latest/userguide/ec2-controls.html",
+          "quote": "For an added layer of security of your sensitive data in EBS volumes, you should enable EBS encryption at rest."
+        },
+        {
+          "page": "aws_ebs_volume (AWS provider 6.67.0)",
+          "title": "Resource: aws_ebs_volume",
+          "section": "Argument Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/6.67.0/docs/resources/ebs_volume",
+          "quote": "If true, the disk will be encrypted."
+        }
+      ]
+    },
+    {
+      "id": "stateful-delete",
+      "severity": "warning",
+      "cloud": "terraform",
+      "address": "aws_db_instance.legacy_reports",
+      "type": "aws_db_instance",
+      "attribute": "(resource)",
+      "action": "delete",
+      "message": "The plan deletes this DB instance, and the data in it goes with it unless it is kept somewhere else. skip_final_snapshot is true on it, so no final snapshot is taken.",
+      "fix": "Check that the data is saved or no longer needed. To keep the object, remove it from the plan (for example with a removed block or terraform state rm) or set prevent_destroy to true.",
+      "manual": [
+        {
+          "page": "Terraform lifecycle reference",
+          "title": "lifecycle reference",
+          "section": "prevent_destroy",
+          "url": "https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle",
+          "quote": "Use this rule as protection against accidentally replacing objects that may be costly to reproduce, such as database instances, storage, or other stateful resources."
+        },
+        {
+          "page": "Terraform lifecycle reference",
+          "title": "lifecycle reference",
+          "section": "prevent_destroy",
+          "url": "https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle",
+          "quote": "When prevent_destroy is set to true, Terraform rejects plans that would destroy the infrastructure object associated with the resource and returns an error."
+        },
+        {
+          "page": "Terraform JSON Output Format",
+          "title": "JSON Output Format Overview",
+          "section": "Change Representation",
+          "url": "https://developer.hashicorp.com/terraform/internals/json-format",
+          "quote": "The two \"replace\" actions are represented in this way to allow callers to e.g. just scan the list for \"delete\" to recognize all three situations where the object will be deleted, allowing for any new deletion combinations that might be added in future."
+        },
+        {
+          "page": "aws_db_instance (AWS provider 6.67.0)",
+          "title": "Resource: aws_db_instance",
+          "section": "Argument Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/aws/6.67.0/docs/resources/db_instance",
+          "quote": "Whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created."
+        }
+      ]
+    },
+    {
+      "id": "stateful-replace",
+      "severity": "warning",
+      "cloud": "terraform",
+      "address": "aws_ebs_volume.orders_data",
+      "type": "aws_ebs_volume",
+      "attribute": "availability_zone",
+      "action": "replace",
+      "message": "The plan replaces this volume: it is destroyed and created again, and the data in the old one is lost unless it is kept somewhere else. Terraform gives the reason replace_because_cannot_update.",
+      "fix": "Check that the data is saved or no longer needed, and look at the attribute that forces the replacement. Set prevent_destroy to true if the object must never be replaced.",
+      "manual": [
+        {
+          "page": "Terraform lifecycle reference",
+          "title": "lifecycle reference",
+          "section": "prevent_destroy",
+          "url": "https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle",
+          "quote": "Use this rule as protection against accidentally replacing objects that may be costly to reproduce, such as database instances, storage, or other stateful resources."
+        },
+        {
+          "page": "Terraform lifecycle reference",
+          "title": "lifecycle reference",
+          "section": "prevent_destroy",
+          "url": "https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle",
+          "quote": "When prevent_destroy is set to true, Terraform rejects plans that would destroy the infrastructure object associated with the resource and returns an error."
+        },
+        {
+          "page": "Terraform JSON Output Format",
+          "title": "JSON Output Format Overview",
+          "section": "Change Representation",
+          "url": "https://developer.hashicorp.com/terraform/internals/json-format",
+          "quote": "The two \"replace\" actions are represented in this way to allow callers to e.g. just scan the list for \"delete\" to recognize all three situations where the object will be deleted, allowing for any new deletion combinations that might be added in future."
+        },
+        {
+          "page": "Amazon EBS, Delete a volume",
+          "title": "Delete an Amazon EBS volume",
+          "section": "Delete an Amazon EBS volume",
+          "url": "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-deleting-volume.html",
+          "quote": "After deletion, its data is gone and the volume can't be attached to any instance."
+        }
+      ]
+    },
+    {
+      "id": "azure-storage-public-blob-access",
+      "severity": "error",
+      "cloud": "azure",
+      "address": "azurerm_storage_account.orders_files",
+      "type": "azurerm_storage_account",
+      "attribute": "allow_nested_items_to_be_public",
+      "action": "create",
+      "message": "allow_nested_items_to_be_public is true, so containers in the storage account can be set up for anonymous read access.",
+      "fix": "Set allow_nested_items_to_be_public to false.",
+      "manual": [
+        {
+          "page": "Microsoft Learn, Remediate anonymous read access to blob data",
+          "title": "Remediate anonymous read access to blob data (Azure Resource Manager deployments)",
+          "section": "Remediate anonymous read access to blob data (Azure Resource Manager deployments)",
+          "url": "https://learn.microsoft.com/en-us/azure/storage/blobs/anonymous-read-access-prevent",
+          "quote": "When a container is configured for anonymous access, any client can read data in that container."
+        },
+        {
+          "page": "Microsoft Learn, Remediate anonymous read access to blob data",
+          "title": "Remediate anonymous read access to blob data (Azure Resource Manager deployments)",
+          "section": "Remediate anonymous read access to blob data (Azure Resource Manager deployments)",
+          "url": "https://learn.microsoft.com/en-us/azure/storage/blobs/anonymous-read-access-prevent",
+          "quote": "Anonymous access presents a potential security risk, so if your scenario does not require it, we recommend that you disallow it for the storage account."
+        },
+        {
+          "page": "azurerm_storage_account (AzureRM provider 5.8.0)",
+          "title": "azurerm_storage_account",
+          "section": "Arguments Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/azurerm/5.8.0/docs/resources/storage_account",
+          "quote": "Allow or disallow nested items within this Account to opt into being public. Defaults to `false`."
+        },
+        {
+          "page": "azurerm_storage_account (AzureRM provider 4.64.0)",
+          "title": "azurerm_storage_account",
+          "section": "Arguments Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/azurerm/4.64.0/docs/resources/storage_account",
+          "quote": "Allow or disallow nested items within this Account to opt into being public. Defaults to `true`."
+        }
+      ]
+    },
+    {
+      "id": "azure-storage-public-network-access",
+      "severity": "warning",
+      "cloud": "azure",
+      "address": "azurerm_storage_account.orders_files",
+      "type": "azurerm_storage_account",
+      "attribute": "public_network_access_enabled",
+      "action": "create",
+      "message": "The storage account has public network access enabled and no network rule that denies by default, so its public endpoint answers connections from any network.",
+      "fix": "Turn public network access off (public_network_access = \"Disabled\", or public_network_access_enabled = false in the older provider), or add network_rules with default_action = \"Deny\" and list the networks that need access.",
+      "manual": [
+        {
+          "page": "Microsoft Learn, Azure Storage firewall rules",
+          "title": "Azure Storage firewall rules and network access control",
+          "section": "Azure Storage firewall rules and network access control",
+          "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security",
+          "quote": "By default, storage accounts allow connections from any network, but you can restrict access by configuring network rules that define which sources can connect to your storage account."
+        },
+        {
+          "page": "Microsoft Learn, Azure Storage firewall rules",
+          "title": "Azure Storage firewall rules and network access control",
+          "section": "Azure Storage firewall rules and network access control",
+          "url": "https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security",
+          "quote": "When you configure network rules, only traffic from explicitly allowed sources can access your storage account through its public endpoint. All other traffic is denied."
+        },
+        {
+          "page": "azurerm_storage_account (AzureRM provider 5.8.0)",
+          "title": "azurerm_storage_account",
+          "section": "Arguments Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/azurerm/5.8.0/docs/resources/storage_account",
+          "quote": "The public network access setting. Possible values are `Disabled`, `Enabled`, and `SecuredByPerimeter`. Defaults to `Enabled`."
+        },
+        {
+          "page": "azurerm_storage_account (AzureRM provider 4.64.0)",
+          "title": "azurerm_storage_account",
+          "section": "Arguments Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/azurerm/4.64.0/docs/resources/storage_account",
+          "quote": "Whether the public network access is enabled? Defaults to `true`."
+        },
+        {
+          "page": "azurerm_storage_account (AzureRM provider 5.8.0)",
+          "title": "azurerm_storage_account",
+          "section": "Arguments Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/azurerm/5.8.0/docs/resources/storage_account",
+          "quote": "Network Rules can be defined either directly on the `azurerm_storage_account` resource, or using the `azurerm_storage_account_network_rules` resource - but the two cannot be used together."
+        }
+      ]
+    },
+    {
+      "id": "azure-storage-min-tls",
+      "severity": "warning",
+      "cloud": "azure",
+      "address": "azurerm_storage_account.orders_files",
+      "type": "azurerm_storage_account",
+      "attribute": "min_tls_version",
+      "action": "create",
+      "message": "min_tls_version is TLS1_0, which is below TLS1_2, the minimum that Microsoft recommends.",
+      "fix": "Set min_tls_version to TLS1_2.",
+      "manual": [
+        {
+          "page": "Microsoft Learn, Minimum TLS version for a storage account",
+          "title": "Enforce a minimum required version of Transport Layer Security (TLS) for requests to a storage account",
+          "section": "Enforce a minimum required version of Transport Layer Security (TLS) for requests to a storage account",
+          "url": "https://learn.microsoft.com/en-us/azure/storage/common/transport-layer-security-configure-minimum-version",
+          "quote": "The recommended minimum TLS version is TLS 1.2."
+        },
+        {
+          "page": "Microsoft Learn, Minimum TLS version for a storage account",
+          "title": "Enforce a minimum required version of Transport Layer Security (TLS) for requests to a storage account",
+          "section": "Remediate security risks with a minimum version of TLS",
+          "url": "https://learn.microsoft.com/en-us/azure/storage/common/transport-layer-security-configure-minimum-version",
+          "quote": "Requiring that clients use a minimum version of TLS to make requests against a storage account is part of a strategy to minimize security risks to your data."
+        },
+        {
+          "page": "azurerm_storage_account (AzureRM provider 4.64.0)",
+          "title": "azurerm_storage_account",
+          "section": "Arguments Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/azurerm/4.64.0/docs/resources/storage_account",
+          "quote": "The minimum supported TLS version for the storage account. Possible values are `TLS1_0`, `TLS1_1`, `TLS1_2` and `TLS1_3`. Defaults to `TLS1_2` for new storage accounts."
+        }
+      ]
+    },
+    {
+      "id": "azure-nsg-ssh-open",
+      "severity": "error",
+      "cloud": "azure",
+      "address": "azurerm_network_security_rule.ssh_any",
+      "type": "azurerm_network_security_rule",
+      "attribute": "source_address_prefix",
+      "action": "create",
+      "message": "An inbound rule allows TCP from any source to port 22 (SSH), so SSH is open to the internet.",
+      "fix": "Limit the source to the addresses that need SSH access, or use just-in-time access, or remove the rule.",
+      "manual": [
+        {
+          "page": "Microsoft Learn, Just-in-time machine access",
+          "title": "Just-in-time machine access in Microsoft Defender for Cloud",
+          "section": "Just-in-time machine access in Microsoft Defender for Cloud",
+          "url": "https://learn.microsoft.com/en-us/azure/defender-for-cloud/just-in-time-access-overview",
+          "quote": "Just-in-time protects your resources from threat actors actively hunting for machines with open management ports, such as Remote Desktop Protocol (RDP) or Secure Shell (SSH)."
+        },
+        {
+          "page": "Microsoft Learn, Just-in-time machine access",
+          "title": "Just-in-time machine access in Microsoft Defender for Cloud",
+          "section": "Just-in-time machine access in Microsoft Defender for Cloud",
+          "url": "https://learn.microsoft.com/en-us/azure/defender-for-cloud/just-in-time-access-overview",
+          "quote": "To reduce attack surfaces, minimize open ports, especially management ports."
+        },
+        {
+          "page": "Microsoft Learn, Enable just-in-time access",
+          "title": "Enable just-in-time access",
+          "section": "Enable JIT on your VMs from Microsoft Defender for Cloud",
+          "url": "https://learn.microsoft.com/en-us/azure/defender-for-cloud/just-in-time-access-usage",
+          "quote": "The JIT VM access page opens listing the ports that Defender for Cloud recommends protecting:"
+        },
+        {
+          "page": "azurerm_network_security_rule (AzureRM provider 5.8.0)",
+          "title": "azurerm_network_security_rule",
+          "section": "Arguments Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/azurerm/5.8.0/docs/resources/network_security_rule",
+          "quote": "CIDR or source IP range or * to match any IP. Tags such as `VirtualNetwork`, `AzureLoadBalancer` and `Internet` can also be used."
+        },
+        {
+          "page": "azurerm_network_security_rule (AzureRM provider 5.8.0)",
+          "title": "azurerm_network_security_rule",
+          "section": "Arguments Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/azurerm/5.8.0/docs/resources/network_security_rule",
+          "quote": "Network protocol this rule applies to. Possible values include `Tcp`, `Udp`, `Icmp`, `Esp`, `Ah` or `*` (which matches all)."
+        },
+        {
+          "page": "Microsoft Learn, Network security groups",
+          "title": "Azure network security groups overview",
+          "section": "DenyAllOutBound",
+          "url": "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview",
+          "quote": "0.0.0.0/0 in the Source and Destination columns represents all IP addresses."
+        }
+      ]
+    },
+    {
+      "id": "azure-nsg-rdp-open",
+      "severity": "error",
+      "cloud": "azure",
+      "address": "azurerm_network_security_group.orders_inline",
+      "type": "azurerm_network_security_group",
+      "attribute": "security_rule[0].source_address_prefix",
+      "action": "create",
+      "message": "An inbound rule allows all protocols from Internet to port 3389 (RDP), so RDP is open to the internet.",
+      "fix": "Limit the source to the addresses that need RDP access, or use just-in-time access, or remove the rule.",
+      "manual": [
+        {
+          "page": "Microsoft Learn, Just-in-time machine access",
+          "title": "Just-in-time machine access in Microsoft Defender for Cloud",
+          "section": "Just-in-time machine access in Microsoft Defender for Cloud",
+          "url": "https://learn.microsoft.com/en-us/azure/defender-for-cloud/just-in-time-access-overview",
+          "quote": "Just-in-time protects your resources from threat actors actively hunting for machines with open management ports, such as Remote Desktop Protocol (RDP) or Secure Shell (SSH)."
+        },
+        {
+          "page": "Microsoft Learn, Just-in-time machine access",
+          "title": "Just-in-time machine access in Microsoft Defender for Cloud",
+          "section": "Just-in-time machine access in Microsoft Defender for Cloud",
+          "url": "https://learn.microsoft.com/en-us/azure/defender-for-cloud/just-in-time-access-overview",
+          "quote": "To reduce attack surfaces, minimize open ports, especially management ports."
+        },
+        {
+          "page": "Microsoft Learn, Enable just-in-time access",
+          "title": "Enable just-in-time access",
+          "section": "Enable JIT on your VMs from Microsoft Defender for Cloud",
+          "url": "https://learn.microsoft.com/en-us/azure/defender-for-cloud/just-in-time-access-usage",
+          "quote": "The JIT VM access page opens listing the ports that Defender for Cloud recommends protecting:"
+        },
+        {
+          "page": "azurerm_network_security_rule (AzureRM provider 5.8.0)",
+          "title": "azurerm_network_security_rule",
+          "section": "Arguments Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/azurerm/5.8.0/docs/resources/network_security_rule",
+          "quote": "CIDR or source IP range or * to match any IP. Tags such as `VirtualNetwork`, `AzureLoadBalancer` and `Internet` can also be used."
+        },
+        {
+          "page": "azurerm_network_security_rule (AzureRM provider 5.8.0)",
+          "title": "azurerm_network_security_rule",
+          "section": "Arguments Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/azurerm/5.8.0/docs/resources/network_security_rule",
+          "quote": "Network protocol this rule applies to. Possible values include `Tcp`, `Udp`, `Icmp`, `Esp`, `Ah` or `*` (which matches all)."
+        },
+        {
+          "page": "Microsoft Learn, Network security groups",
+          "title": "Azure network security groups overview",
+          "section": "DenyAllOutBound",
+          "url": "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview",
+          "quote": "0.0.0.0/0 in the Source and Destination columns represents all IP addresses."
+        }
+      ]
+    },
+    {
+      "id": "gcp-bucket-uniform-access-off",
+      "severity": "warning",
+      "cloud": "google",
+      "address": "google_storage_bucket.orders_exports",
+      "type": "google_storage_bucket",
+      "attribute": "uniform_bucket_level_access",
+      "action": "create",
+      "message": "uniform_bucket_level_access is false, so ACLs stay active on the bucket next to IAM.",
+      "fix": "Set uniform_bucket_level_access to true.",
+      "manual": [
+        {
+          "page": "Google Cloud, Uniform bucket-level access",
+          "title": "Uniform bucket-level access",
+          "section": "Should you use uniform bucket-level access?",
+          "url": "https://cloud.google.com/storage/docs/uniform-bucket-level-access",
+          "quote": "Uniform bucket-level access prevents unintended data exposure from ACLs."
+        },
+        {
+          "page": "Google Cloud, Uniform bucket-level access",
+          "title": "Uniform bucket-level access",
+          "section": "Uniform bucket-level access",
+          "url": "https://cloud.google.com/storage/docs/uniform-bucket-level-access",
+          "quote": "When you enable uniform bucket-level access on a bucket, Access Control Lists (ACLs) are disabled, and only bucket-level Identity and Access Management (IAM) permissions grant access to that bucket and the objects it contains."
+        },
+        {
+          "page": "Google Cloud, Security Command Center vulnerability findings",
+          "title": "",
+          "section": "Bucket policy only disabled",
+          "url": "https://cloud.google.com/security-command-center/docs/concepts-vulnerabilities-findings",
+          "quote": "Uniform bucket-level access, previously called Bucket Policy Only, isn't configured."
+        }
+      ]
+    },
+    {
+      "id": "gcp-bucket-public-all-users",
+      "severity": "error",
+      "cloud": "google",
+      "address": "google_storage_bucket_iam_member.public_read",
+      "type": "google_storage_bucket_iam_member",
+      "attribute": "member",
+      "action": "create",
+      "message": "allUsers is granted the role roles/storage.objectViewer on the bucket, so anyone on the internet gets that access.",
+      "fix": "Grant the role to the identities that need it (users, groups or service accounts), and not to a special identifier for everyone.",
+      "manual": [
+        {
+          "page": "Google Cloud, IAM principals",
+          "title": "IAM principals",
+          "section": "allUsers",
+          "url": "https://cloud.google.com/iam/docs/principals-overview",
+          "quote": "The value allUsers is a special identifier that represents anyone who is on the internet, including authenticated and unauthenticated users."
+        },
+        {
+          "page": "google_storage_bucket_iam (Google provider 8.5.0)",
+          "title": "IAM policy for Cloud Storage Bucket",
+          "section": "Argument Reference",
+          "url": "https://registry.terraform.io/providers/hashicorp/google/8.5.0/docs/resources/storage_bucket_iam",
+          "quote": "A special identifier that represents anyone who is on the internet; with or without a Google account."
+        }
+      ]
+    },
+    {
+      "id": "value-unknown",
+      "severity": "info",
+      "cloud": "terraform",
+      "address": "google_storage_bucket_iam_binding.support",
+      "type": "google_storage_bucket_iam_binding",
+      "attribute": "members",
+      "action": "create",
+      "message": "members is not known until apply, so the check on it was not made and nothing was guessed.",
+      "fix": "Make the value one that Terraform can know at plan time, or review it by hand after apply.",
+      "manual": [
+        {
+          "page": "Terraform JSON Output Format",
+          "title": "JSON Output Format Overview",
+          "section": "Change Representation",
+          "url": "https://developer.hashicorp.com/terraform/internals/json-format",
+          "quote": "\"after_unknown\" is an object value with similar structure to \"after\", but with all unknown leaf values replaced with \"true\", and all known leaf values omitted."
+        }
+      ]
+    },
+    {
+      "id": "gcp-firewall-ssh-open",
+      "severity": "error",
+      "cloud": "google",
+      "address": "google_compute_firewall.ssh",
+      "type": "google_compute_firewall",
+      "attribute": "source_ranges[0]",
+      "action": "create",
+      "message": "The firewall rule allows ingress from 0.0.0.0/0, which is any IPv4 address, to TCP port 22 (SSH).",
+      "fix": "Limit source_ranges to the addresses that need SSH access, or reach the machines through a proxy such as Identity-Aware Proxy, or remove the rule.",
+      "manual": [
+        {
+          "page": "Google Cloud, Security Command Center vulnerability findings",
+          "title": "",
+          "section": "Open SSH port",
+          "url": "https://cloud.google.com/security-command-center/docs/concepts-vulnerabilities-findings",
+          "quote": "A firewall is configured to have an open SSH port that allows generic access."
+        },
+        {
+          "page": "Google Cloud, VPC firewall rules",
+          "title": "",
+          "section": "Ingress cases",
+          "url": "https://cloud.google.com/firewall/docs/firewalls",
+          "quote": "The default source is any IPv4 address (0.0.0.0/0)."
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Changed resources of other types are counted and not checked: aws_instance (1)."
+  ],
+  "counts": {
+    "error": 11,
+    "warning": 8,
+    "info": 1
+  },
+  "gate": {
+    "failOn": "error",
+    "pass": false,
+    "reason": "11 errors"
+  }
+}
